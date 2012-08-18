@@ -61,7 +61,7 @@ class MoviesController < ApplicationController
   end
 
   def same_director
-    #@movie = Movie.find(params[:id])  
-        
+    @movie = Movie.find(params[:id])  
+    @movies = Movie.find_all_by_director(@movie.director)   
   end
 end

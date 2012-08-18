@@ -21,6 +21,9 @@ module NavigationHelpers
     when /^the details page for "(.*)"/
       id = movieIdByTitle($1)
       "/movies/#{id}"
+    when /^the Similar Movies page for "(.*)"/
+      id = movieIdByTitle($1)
+      "/movies/#{id}/same_director"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
