@@ -15,6 +15,9 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    when /^the edit page for "(.*)"/
+      id = movieIdByTitle($1)
+      "/movies/#{id}/edit"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
@@ -32,6 +35,10 @@ module NavigationHelpers
           "Now, go and add a mapping in #{__FILE__}"
       end
     end
+  end
+  def movieIdByTitle(title)
+	movie = Movie.find_by_title(title)
+	movie.id.to_s
   end
 end
 
