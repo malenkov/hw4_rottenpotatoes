@@ -30,6 +30,8 @@ class MoviesController < ApplicationController
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
     @movies = Movie.find_all_by_rating(@selected_ratings.keys, ordering)
+
+    @message = flash[:message]
   end
 
   def new
@@ -61,7 +63,13 @@ class MoviesController < ApplicationController
   end
 
   def same_director
-    @movie = Movie.find(params[:id])  
-    @movies = Movie.find_all_by_director(@movie.director)   
+    @movie = Movie.find(params[:id]) 
+
+    if @movie.director.to_s == '' 
+      flash[:message] = "'#{@movie.title}' has no director info"
+      redirect_to movies_path
+    else
+      @movies = Movie.find_all_by_director(@movie.director)   
+    end
   end
 end

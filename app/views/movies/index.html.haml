@@ -1,6 +1,9 @@
 -#  This file is app/views/movies/index.html.haml
 %h1 All Movies
 
+- if @message
+  %p= @message
+
 = form_tag movies_path, :method => :get, :id => 'ratings_form' do
   = hidden_field_tag "title_sort", true if @title_header
   = hidden_field_tag ":release_date_sort", true if @date_header
@@ -25,6 +28,6 @@
         %td= movie.rating
         %td= movie.release_date
         %td= movie.director
-	%td= link_to "More about #{movie.title}", movie_path(movie)
+        %td= link_to "More about #{movie.title}", movie_path(movie)
 
 = link_to 'Add new movie', new_movie_path
